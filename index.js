@@ -15,7 +15,7 @@ const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '123456',
-  database: 'on_test'
+  database: 'node_crud'
 });
 
 //connect to database
@@ -46,7 +46,7 @@ app.get('/',(req, res) => {
 
 //route for insert data
 app.post('/save',(req, res) => {
-  let data = {product_name: req.body.product_name, product_price: req.body.product_price};
+  let data = {product_name: req.body.product_name, product_price: req.body.product_price, product_quality: req.body.product_quality};
   let sql = "INSERT INTO product SET ?";
   let query = conn.query(sql, data,(err, results) => {
     if(err) throw err;
@@ -56,7 +56,7 @@ app.post('/save',(req, res) => {
 
 //route for update data
 app.post('/update',(req, res) => {
-  let sql = "UPDATE product SET product_name='"+req.body.product_name+"', product_price='"+req.body.product_price+"' WHERE product_id="+req.body.id;
+  let sql = "UPDATE product SET product_name='"+req.body.product_name+"', product_price='"+req.body.product_price+"', product_quality='"+req.body.product_quality+"' WHERE product_id="+req.body.id;
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;
     res.redirect('/');
